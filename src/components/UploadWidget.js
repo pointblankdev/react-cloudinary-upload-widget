@@ -2,7 +2,7 @@ import React from 'react'
 import WidgetButton from './WidgetButton'
 import myWidget from '../functions/myWidget'
 
-const UploadWidget = ({
+const UploadWidget = React.forwardRef(({
   sources = [],
   sourceKeys = null,
   resourceType = 'auto',
@@ -26,7 +26,8 @@ const UploadWidget = ({
   unique_filename = false,
   googleDriveClientId = null,
   multiple = false
-}) => {
+}, ref) => {
+
   const myWidgetFunction = () =>
     myWidget(
       sources,
@@ -54,12 +55,13 @@ const UploadWidget = ({
 
   return (
     <WidgetButton
+      ref={ref}
       myWidgetFunction={myWidgetFunction}
       buttonText={buttonText}
       style={style}
     />
   )
-}
+})
 
 // params_to_sign: [
 //   ...(eager ? [`eager=${eager}`] : []),
